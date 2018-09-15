@@ -6,6 +6,13 @@
 virtualenv env --no-site-packages
 source env/bin/activate
 ```
-3. Установить зависимости проекта `pip install -r requirements.txt`
-4. Далее действовать по инструкции https://djbook.ru/examples/77/, кроме пунктов 6-7
-5. Выполнить 
+3. Установить зависимости проекта `pip install -r project/requirements.txt`
+4. Далее действовать по инструкции https://djbook.ru/examples/77/, до п.6
+5. Выполнить скрипт project/fill.py
+6. Выполнить 
+```
+cd project
+./manage.py migrate
+./manage.py createsuperuser
+./manage runserver
+```
