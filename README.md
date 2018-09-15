@@ -16,3 +16,5 @@ cd project
 ./manage.py createsuperuser
 ./manage runserver
 ```
+
+Шаблоны .html находятся, например, в /project/blogs/templates
