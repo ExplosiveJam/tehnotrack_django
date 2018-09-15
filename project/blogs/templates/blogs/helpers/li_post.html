@@ -1,0 +1,44 @@
+{% load static %}
+{% load core_tags %}
+{% load comment_tags %}
+{% load like_tags %}
+<li style="margin-bottom: 2rem">
+    <div class="small text-gray-dark mb-1">
+        {% prettyuser post.blog.author %} {{ post.created_at|date:"SHORT_DATE_FORMAT" }}</div>
+    <a href="{% url "posts:post_detail" post.id %}"><h2>{{ post.title }}</h2></a>
+    <div class="text-info container mt-0 ml-0 mb-1">
+        <div class="row flex-row flex-md-wrap">
+            <div>
+                {% with blog=post.blog.title %}
+                    Блог: <a
+                        href="{{ post.get_absolute_url }}" data-toggle="tooltip" data-placement="top"
+                        title="{{ blog }}">{{ blog|truncatewords:4 }}</a>
+                {% endwith %}
+            </div>
+            <div class="col-md-1"></div>
+            {% for category in post.categories.all %}
+                <div class="d-inline-block ml-1 mr-1">
+                    <a class="badge badge-pill badge-info"
+                       href="{{ category.get_absolute_url }}">{{ category }}</a></div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row mt-2">
+        <p>{{ post.text|truncatewords:150 }}</p>
+    </div>
+    <div class="row">
+        <a role="button" class="btn btn-link mt-0" href="{{ post.get_absolute_url }}">Читать дальше</a>
+        <div class="col-md-1"></div>
+        {% like post %}
+        <div class="col-md-1"></div>
+        {% comment_button post %}
+        {% if user == post.blog.author %}
+            <div class="col-md-1"></div>
+            <a role="button" class="btn" href="{% url "posts:post_edit" post.id %}"
+               style="background-color: transparent" data-toggle="tooltip" title="Редактировать">
+                <i class="icon-edit" style="color: black"></i>
+            </a>
+        {% endif %}
+
+    </div>
+</li>

@@ -1,0 +1,21 @@
+{% extends "core/base.html" %}
+{% load blogs_tags %}
+
+{% block title %}
+    Список категорий
+{% endblock title %}
+
+{% block header %}
+    Список категорий
+{% endblock %}
+
+{% block content %}
+    <ul class="list-unstyled">
+        {% for category in category_list %}
+            {% li_category category %}
+        {% endfor %}
+    </ul>
+
+    {% include "blogs/helpers/pagination.html" %}
+
+{% endblock %}

@@ -1,0 +1,94 @@
+{% extends "core/base.html" %}
+{% load core_tags %}
+{% load blogs_tags %}
+
+{% block title %}
+    Страница пользователя {{ user }}
+{% endblock title %}
+
+{% block header %}
+    {% prettyuser user width="60px" %}
+    <div class="small">{{ user.get_full_name }}</div>
+{% endblock %}
+
+{% block content %}
+    {% with comments=user.comments.all blogs=user.blogs.all posts=user.posts %}
+
+        <ul class="nav nav-tabs mb-4" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">Профиль</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#blogs" role="tab" data-toggle="tab">Блоги <span
+                        class="text-muted">{{ blogs.count }}</span> </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#posts" role="tab" data-toggle="tab">Посты <span
+                        class="text-muted">{{ posts.count }}</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#user-comments" role="tab" data-toggle="tab">Комментарии <span
+                        class="text-muted">{{ comments.count }}</span></a>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active container" id="profile" role="tabpanel">
+                {% if user.about %}
+                    <h6 class="font-weight-bold">О себе</h6>
+                    <p class="mb-2">{{ user.about }}</p>
+                {% endif %}
+                {% if user.birthday %}
+                    <div class="mb-2">
+                        <span class="font-weight-bold">Дата рождения:</span> {{ user.birthday|date:"j E Y" }}
+                    </div>
+                {% endif %}
+                <div>
+                    <span class="font-weight-bold">Дата регистрации:</span> {{ user.date_joined|date:"j E Y" }}
+                </div>
+                {% with last_login=user.last_login %}
+                    <span class="font-weight-bold">Активность:</span> {{ last_login|date:"j E Y" }}г. в
+                    {{ last_login|time:"H:i" }}
+                {% endwith %}
+            </div>
+
+            <div class="tab-pane container" id="blogs" role="tabpanel">
+                {% if blogs %}
+                    <ul class="list-unstyled">
+                        {% for blog in blogs %}
+                            {% li_blog blog %}
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <div class="h5">Пользователь не ведет блоги.</div>
+                {% endif %}
+            </div>
+
+            <div class="tab-pane container" id="posts" role="tabpanel">
+                {% if posts %}
+                    <ul class="list-unstyled">
+                        {% for post in posts %}
+                            {% li_post post %}
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <div class="h5">У пользователя нет постов.</div>
+                {% endif %}
+            </div>
+
+            <div class="tab-pane container" id="user-comments" role="tabpanel">
+                {% if comments %}
+                    {% load comment_tags %}
+                    <ul class="list-unstyled">
+                        {% for comment in comments %}
+                            {% show_comment comment True %}
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <div class="h5">Пользователь ничего не комментировал.</div>
+                {% endif %}
+            </div>
+        </div>
+
+    {% endwith %}
+{% endblock %}

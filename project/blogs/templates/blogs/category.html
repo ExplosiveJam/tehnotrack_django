@@ -1,0 +1,31 @@
+{% extends "core/base.html" %}
+{% load blogs_tags %}
+
+{% block title %}
+    Категория {{ category.name }}
+{% endblock title %}
+
+{% block header %}
+    Категория "{{ category.name }}"
+{% endblock %}
+
+{% block content %}
+    <p class="description">{{ category.description }}</p>
+    <div class="d-flex flex-row">
+        <a href="{% url "categories:category_list" %}">К списку категорий</a>
+    </div>
+    <hr size="2" width="100%" color="black">
+    {% if category.posts.all %}
+    <h5 class="container text-center mt-4">Посты, относящиеся к категории:</h5>
+    <ul class="list-unstyled">
+        {% for post in category.posts.all %}
+            {% li_post post %}
+        {% endfor %}
+    </ul>
+    {% else %}
+        <div class="text-info">Увы, категория пуста.</div>
+    {% endif %}
+
+    {% include "blogs/helpers/pagination.html" %}
+
+{% endblock %}

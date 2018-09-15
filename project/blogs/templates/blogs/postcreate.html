@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+    Создание поста
+{% endblock %}
+
+{% block header %}
+    Создание поста
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post">{% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Создать">
+    </form>
+{% endblock %}

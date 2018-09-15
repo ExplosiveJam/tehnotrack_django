@@ -1,0 +1,18 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+    Главная
+{% endblock %}
+
+{% block header %}
+    Мой сайт.
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <a class="col-md-4 text-center" href="{% url "blogs:blog_list" %}">Список блогов</a>
+            <a class="col-md-4 text-center" href="{% url "posts:post_list" %}">Список постов</a>
+            <a class="col-md-4 text-center" href="{% url "categories:category_list" %}">Список категорий</a>
+        </div>
+{% endblock %}

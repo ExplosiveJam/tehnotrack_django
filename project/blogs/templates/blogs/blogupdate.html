@@ -1,0 +1,16 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+    Редактирование блога
+{% endblock %}
+
+{% block header %}
+    Редактирование блога {{ blog.id }}
+{% endblock %}
+
+{% block content %}
+    <form action="" method="post">{% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Изменить">
+    </form>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% load core_tags %}
+<li class="li-content">
+    <div class="small text-gray-dark mb-1">
+        {% prettyuser blog.author %} {{ blog.created_at|date:"SHORT_DATE_FORMAT" }}</div>
+    <a href="{{ blog.get_absolute_url }}"><h2>{{ blog.title }}</h2></a>
+    <div class="container mt-0 ml-0 mb-1">
+        <div class="row">
+            <span class="text-info">Постов в блоге: {{ blog.posts.count }}</span>
+            {% if user == blog.author %}
+                <div class="col-md-1"></div>
+                <a role="button" class="btn" href="{% url "blogs:blog_edit" blog.id %}"
+                   style="background-color: transparent; position:relative; bottom: 0.5rem" data-toggle="tooltip"
+                   title="Редактировать">
+                    <i class="icon-edit" style="color: black"></i>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <p>{{ blog.description|truncatewords:200 }}</p>
+    </div>
+</li>

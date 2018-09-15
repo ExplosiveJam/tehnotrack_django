@@ -1,0 +1,21 @@
+{% load core_tags %}
+{% load like_tags %}
+<div style="margin-bottom: 1.5rem; margin-left: {{ ml }}" data-comment-id="{{ comment.id }}" data-parent-id="{{ comment.parent.id }}">
+    <div class="small text-gray-dark d-flex flex-row justify-content-between flex-wrap" style="background-color: beige">
+        <div>
+            {% prettyuser comment.author %} {{ comment.created_at|date:"SHORT_DATE_FORMAT" }}
+            в {{ comment.created_at|time }}
+        </div>
+        {% if not read_only %}
+            <button class="btn btn-sm btn-comment-reply" style="background-color: transparent; cursor: pointer" data-toggle="tooltip"
+                    title="Ответить"><i class="icon-chat"></i><i class="small"></i>
+            </button>
+        {% endif %}
+        <div>
+            {% like comment False %}
+        </div>
+    </div>
+    <div style="margin-top: 0.4rem">
+        {{ comment.text }}
+    </div>
+</div>

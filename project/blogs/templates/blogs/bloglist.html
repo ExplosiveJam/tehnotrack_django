@@ -1,0 +1,26 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% load blogs_tags %}
+
+{% block css %}
+    <link href="{% static "blogs/list.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+    Список блогов
+{% endblock title %}
+
+{% block header %}
+    Список блогов
+{% endblock %}
+
+{% block content %}
+    <ul class="list-unstyled w-100">
+    {% for blog in blog_list %}
+        {% li_blog blog %}
+    {% endfor %}
+    </ul>
+
+    {% include "blogs/helpers/pagination.html" %}
+
+{% endblock %}

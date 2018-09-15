@@ -1,0 +1,13 @@
+<li>
+    <a href="{{ category.get_absolute_url }}"><h2>{{ category.name }}</h2></a>
+    <div class="text-info container mt-0 ml-0 mb-1">
+        <div class="row">
+                Дата создания: {{ category.created_at|date:"SHORT_DATE_FORMAT" }}
+                <div class="col-md-1"></div>
+                Постов в категории: {{ category.posts.count }}
+        </div>
+    </div>
+    <div class="row">
+            <p>{{ category.description|truncatechars:500 }}</p>
+    </div>
+</li>

@@ -1,0 +1,38 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% load blogs_tags %}
+
+{% block css %}
+    <link href="{% static "blogs/list.css" %}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}
+    Список постов
+{% endblock title %}
+
+{% block header %}
+    Список постов
+{% endblock %}
+
+{% block content %}
+    <form action="" method="get" class="form-inline">
+    <div class="d-md-flex">
+        {% for field in searchform %}
+            <div class="form-control">
+            {{ field.label_tag }} {{ field }}
+            </div>
+        {% endfor %}
+        <div class="d-flex justify-content-center">
+        <input class="btn btn-primary btn-block" type="submit" value="Поиск">
+        </div>
+    </div>
+    </form>
+    <ul class="list-unstyled">
+    {% for post in post_list %}
+        {% li_post post %}
+    {% endfor %}
+    </ul>
+
+    {% include "blogs/helpers/pagination.html" %}
+
+{% endblock %}

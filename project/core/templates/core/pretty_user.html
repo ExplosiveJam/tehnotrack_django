@@ -1,0 +1,8 @@
+<a href="{{ user.get_absolute_url }}" data-toggle="tooltip" data-placement="top"
+   title="Автор" class="prettyuser">
+    {% if user.avatar %}
+        <img src="{{ user.avatar_thumbnail.url }}" width={{ width }} class="rounded">
+    {% else %}
+        {% load static %}
+        <img src="{% static "core/anon.svg" %}" width={{ width }} class="rounded">
+    {% endif %}{{ user.username }}</a>&nbsp;

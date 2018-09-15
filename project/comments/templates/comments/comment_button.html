@@ -1,0 +1,4 @@
+<a role="button" class="btn" href="{% url "posts:post_detail" post.id %}#comments" style="background-color: transparent"
+   data-toggle="tooltip" title="Комментарии">
+    <i class="icon-comment-1" style="color: black"></i><span>{{ comment_count }}</span>
+</a>

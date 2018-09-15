@@ -1,0 +1,59 @@
+.pre {
+    white-space: pre;
+}
+
+.prettyuser:hover {
+    text-decoration: none;
+}
+
+.post-info {
+    background-color: beige;
+    margin-bottom: 1rem;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body + nav {
+    max-height: 4.5em;
+}
+
+nav + div {
+    min-height: 100%;
+    position: relative;
+    margin-top: 5em;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    max-height: 5em;
+}
+
+textarea {
+    width: 100%;
+}
+
+#scrollup {
+    position: fixed;
+    display: none;
+    top: 0;
+    height: 100%;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+#scrollup:hover {
+    background-color: #f7f7f7;
+}
+
+.inside-nav {
+    color: black;
+}
+
+.inside-nav:hover {
+    text-decoration: none;
+    color: black;
+}

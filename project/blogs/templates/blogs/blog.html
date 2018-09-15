@@ -1,0 +1,39 @@
+{% extends "core/base.html" %}
+{% load blogs_tags %}
+{% load core_tags %}
+
+{% block title %}
+    {{ blog.title }}
+{% endblock title %}
+
+{% block header %}
+    {{ blog.title }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="row text-info mt-0 ml-0 mb-3">
+            {% prettyuser blog.author %}
+            <div class="col-md-1"></div>
+            Создан: {{ blog.created_at|date:"j E Y" }}
+            <div class="col-md-1"></div>
+            Постов в блоге: {{ blog.posts.count }}
+        </div>
+        <p class="row mb-0">{{ blog.description }}</p>
+    </div>
+    <hr size="2" width="100%" color="black">
+    {% with posts=blog.posts.all %}
+        {% if posts %}
+            <h4 class="container text-center my-2 h4">Посты</h4>
+            <ul class="list-unstyled">
+                {% for post in posts %}
+                    {% li_post post %}
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="text-info h5">Блог пустует(</div>
+        {% endif %}
+    {% endwith %}
+
+    {% include "blogs/helpers/pagination.html" %}
+{% endblock %}
